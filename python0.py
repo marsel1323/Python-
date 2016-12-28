@@ -1,6 +1,6 @@
 # coding : utf-8
 
 #Комментарий
-
-print("Привет, Даун")
-input()
+print("Perfect python program")
+print("Hi, fool")
+input("Your name:")
