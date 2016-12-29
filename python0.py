@@ -3,4 +3,14 @@
 #Комментарий
 print("Perfect python program")
 print("Hi, fool")
-input("Your name:")
+name = input("Your name:")
+
+print (name, ", Welcome to Python World!")
+
+answer = input ("Let's work? (Y/N)")
+
+if answer == 'Y':
+	print ("You've got moneys!")
+else:
+	print("Goodbye!")
+	
