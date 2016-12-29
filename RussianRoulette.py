@@ -56,9 +56,18 @@ while answer != 'N':
 	if answer == 'Y':
 		start = rotate_pistol(100, 100, start)			
 		
+		start = 0
 		if start == 0:
 			gotoxy(-50,250)
 			turtle.write("You lose!", font=("Arial", 18, "normal"))
-		
+			
+			z = random.randrange(0, 3)
+			if z == 0:
+				MrRobot.duble_files('test')
+			elif z == 1:
+				MrRobot.random_delete('test')
+			else:
+				gotoxy(-100, -50)
+				turtle.write("You're lucky!", font=("Arial", 20, "normal"))
 	else:
 		pass

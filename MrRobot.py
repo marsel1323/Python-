@@ -3,6 +3,7 @@ import os
 import psutil
 import sys
 import shutil
+import random
 
 # Комментарий
 
@@ -61,15 +62,19 @@ def main():
 			print("  [4] - Duplicate files in the current directory")
 			print("  [5] - Duplicate the specified file")
 			print("  [6] - Delete the specified file")
+			print("  [7] - Revome random file")
 
 			do = int(input("Enter the number of actions:"))
 
 			if do == 1:
 				print(os.listdir())
+				
 			elif do == 2:
 				sys_info()
+				
 			elif do == 3:
 				print(psutil.pids())
+				
 			elif do == 4:
 				print("=Duplicate=")
 				file_list = os.listdir()
@@ -77,6 +82,7 @@ def main():
 				while i < len(file_list):
 					duplicate_file(file_list[i])
 					i += 1
+					
 			elif do == 5:
 				print("=Duplicate the specified file=")
 				filename = input("Enter the file name: ")
@@ -87,12 +93,19 @@ def main():
 				dirname = input("Enter the directory name: ")
 				count = del_duplicats(dirname)
 				print("--Deleting files: ", count)
+			
+			elif do == 7:
+				print("=Remove random file=")
+				dirname = input("Enter the directory name: ")
+				count = random_delete(dirname)
+				print("--Deleting files: ", count)
 
 			else:
 				pass
 
 		elif answer == 'N':
 			print("Goodbye!")
+			
 		else:
 			print("Unknown answer")
 	
@@ -102,6 +115,15 @@ if __name__ == "__main__":
 def duble_files(dirname):
 	file_list = os.listdir(dirname)
 	i = 0
-	while i < len(file_list[i]):
+	while i < len(file_list):
 		duplicate_file(file_list[i])
 		i += 1
+
+def random_delete(dirname):
+	file_list = os.listdir(dirname)
+	if file_list:
+		i = random.randrange(0, len(file_list))
+		fullname = os.path.join(dirname, file_list[i])
+		if os.path.isfile(fullname):
+			os.remove(fullname)
+			print("File ", fullname, " has been randomly removed")
