@@ -21,6 +21,8 @@ while answer != 'q':
 		print("  [2] - System Information")
 		print("  [3] - List of processes")
 		print("  [4] - Duplicate files in the current directory")
+		print("  [5] - Duplicate the specified file")
+		print("  [6] - Delete the specified file")
 		
 		do = int(input("Enter the number of actions:"))
 		
@@ -35,13 +37,30 @@ while answer != 'q':
 			print("Current user: ", os.getlogin())
 		elif do == 3:
 			print(psutil.pids())
-		elif do == 3:
+		elif do == 4:
 			print("=Duplicate=")
 			file_list = os.listdir()
 			i = 0
 			while i < len(file_list):
-				newfile = file_list[i] + 'dupl'
-				shutil.copy(file_list[i], newfile) #copy
+				if os.path.isfile(file_list[i]):
+					newfile = file_list[i] + '.dupl'				
+					shutil.copy(file_list[i], newfile) #copy
+				i += 1
+		elif do == 5:
+			print("=Duplicate the specified file=")
+			filename = input("Enter the file name: ")
+			if os.path.isfile(filename):
+				newfile = filename + '.dupl'				
+				shutil.copy(filename, newfile) #copy	
+		elif do == 6:
+			print("=Delete the specified file=")
+			dirname = input("Enter the directory name: ")
+			file_list = os.listdir(dirname)
+			i = 0
+			while i < len(file_list):
+				fullname = os.path.join(dirname, file_list[i]) # \ /
+				if fullname.endswith('.dupl'):
+					os.remove(fullname)					
 				i += 1
 		else:
 			pass
