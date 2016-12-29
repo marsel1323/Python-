@@ -3,6 +3,24 @@ import os, psutil, sys, shutil
 
 # Комментарий
 
+
+def duplicate_file(filename):
+	if os.path.isfile(filename):
+		newfile = filename + '.dupl'				
+		shutil.copy(filename, newfile) #copy	
+		if os.path.exists(newfile):
+			print("File ", newfile, " has been successfully created")
+		else:
+			print("When copying a file had problems")
+
+def sys_info():
+	print("Here's what I know about the system: ")
+	print("Number of processors: ", psutil.cpu_count())
+	print("Platform: ", sys.platform)
+	print("File System Encoding: ", sys.getfilesystemencoding())
+	print("The current directory: ", os.getcwd())
+	print("Current user: ", os.getlogin())
+
 print("Perfect python program")
 print("Hi, fool")
 name = input("Your name:")
@@ -29,12 +47,7 @@ while answer != 'q':
 		if do == 1:
 			print(os.listdir())
 		elif do == 2:
-			print("Here's what I know about the system: ")
-			print("Number of processors: ", psutil.cpu_count())
-			print("Platform: ", sys.platform)
-			print("File System Encoding: ", sys.getfilesystemencoding())
-			print("The current directory: ", os.getcwd())
-			print("Current user: ", os.getlogin())
+			sys_info()
 		elif do == 3:
 			print(psutil.pids())
 		elif do == 4:
@@ -42,23 +55,20 @@ while answer != 'q':
 			file_list = os.listdir()
 			i = 0
 			while i < len(file_list):
-				if os.path.isfile(file_list[i]):
-					newfile = file_list[i] + '.dupl'				
-					shutil.copy(file_list[i], newfile) #copy
+				duplicate_file(file_list[i])
 				i += 1
 		elif do == 5:
 			print("=Duplicate the specified file=")
 			filename = input("Enter the file name: ")
-			if os.path.isfile(filename):
-				newfile = filename + '.dupl'				
-				shutil.copy(filename, newfile) #copy	
+			duplicate_file(filename)
 		elif do == 6:
 			print("=Delete the specified file=")
 			dirname = input("Enter the directory name: ")
 			file_list = os.listdir(dirname)
-			i = 0
-			while i < len(file_list):
-				fullname = os.path.join(dirname, file_list[i]) # \ /
+			#i = 0
+			#while i < len(file_list):
+			for f in file_list:
+				fullname = os.path.join(dirname, f) # \ /
 				if fullname.endswith('.dupl'):
 					os.remove(fullname)					
 				i += 1
