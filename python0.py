@@ -10,8 +10,11 @@ def duplicate_file(filename):
 		shutil.copy(filename, newfile) #copy	
 		if os.path.exists(newfile):
 			print("File ", newfile, " has been successfully created")
+			return True
 		else:
 			print("When copying a file had problems")
+			return False
+	
 
 def sys_info():
 	print("Here's what I know about the system: ")
